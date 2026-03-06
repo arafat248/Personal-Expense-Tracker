@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-2xl mb-4">Categories</h2>
+<div class="flex gap-2 mb-4">
+    <input id="name" class="border p-2">
+    <button onclick="add()" class="bg-blue-500 text-white px-4">Add</button>
+</div>
+<ul id="list"></ul>
+<script>
+    const token = localStorage.getItem("token");
+    function load(){
+        fetch("/api/categories/",{
+            headers:{ "Authorization":"Token "+token }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            list.innerHTML="";
+            data.forEach(c=>{
+                list.innerHTML += `<li class="bg-white p-2 mb-2">${c.name}</li>`
+            })
+        })
+    }
+    async function add(){
+        await fetch("/api/categories/",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Token "+token
+        },
+        body: JSON.stringify({name:name.value})
+        });
+        name.value="";
+        load();
+    }
+    load();
+</script>
+
+{% endblock %}

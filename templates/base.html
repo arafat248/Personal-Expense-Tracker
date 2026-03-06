@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4 text-white flex gap-6">
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/categories/">Categories</a>
+        <a href="/transactions/">Transactions</a>
+        <a href="/add/">Add</a>
+    </nav>
+
+    <div class="p-6">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

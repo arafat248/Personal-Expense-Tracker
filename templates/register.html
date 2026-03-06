@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+    <h2 class="text-2xl mb-4">Register</h2>
+    <form id="regForm">
+        <input class="border p-2 w-full mb-3" placeholder="Username" id="username">
+        <input class="border p-2 w-full mb-3" placeholder="Email" id="email">
+        <input class="border p-2 w-full mb-3" type="password" placeholder="Password" id="password">
+        <button class="bg-green-500 text-white px-4 py-2 w-full">Register</button>
+    </form>
+</div>
+<script>
+    document.getElementById("regForm").onsubmit = async (e)=>{
+        e.preventDefault();
+        await fetch("/api/auth/register/",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body: JSON.stringify({
+                username: username.value,
+                email: email.value,
+                password: password.value
+            })
+        });
+        alert("Registered!");
+        window.location="/";
+    }
+</script>
+
+{% endblock %}
