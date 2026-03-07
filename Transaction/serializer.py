@@ -3,5 +3,7 @@ from .models import TansactionModel
 
 class Transcation_Serial(serializers.ModelSerializer):
     class Meta:
-        model : TansactionModel
-        fields = "__all__"
+        model = TansactionModel
+        fields = [
+            'id', 'user', 'category', 'types', 'amount', 'note', 'date', 'created_at'
+        ]
