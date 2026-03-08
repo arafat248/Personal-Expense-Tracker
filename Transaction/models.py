@@ -10,7 +10,7 @@ class TansactionModel(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
     types = models.CharField(max_length=50, choices= type_choice)
     date = models.DateField(auto_now_add=False)
     note = models.TextField()

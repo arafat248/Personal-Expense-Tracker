@@ -2,6 +2,7 @@ from rest_framework.routers import DefaultRouter
 from account.views import AuthViewSet
 from Transaction.views import TransactionView
 from Category.views import CateloryView
+from deshboard.views import SummaryView, CategorySummaryView, MonthlyView
 
 router = DefaultRouter()
 router.register('auth', AuthViewSet, basename='auth')
