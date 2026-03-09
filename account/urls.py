@@ -1,9 +1,9 @@
-from django.urls import path, include
-from account.views import LogoutView
-from account.views import APIViewSet
+from django.urls import path
+from .views import AuthViewSet
+
 
 urlpatterns = [
-    path('auth/login', include('dj_rest_auth.urls'), name = 'login'),
-    path('auth/register/', include('dj_rest_auth.registration.urls'), name= 'register'),
-    path('auth/logout/', LogoutView.as_view(), name='logout'),
+    path('register/', AuthViewSet.as_view({'post': 'register'})),
+    path('login/', AuthViewSet.as_view({'post': 'login'})),
+    path('logout/', AuthViewSet.as_view({'post': 'logout'})),
 ]
