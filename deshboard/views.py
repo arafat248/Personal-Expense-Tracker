@@ -42,17 +42,22 @@ class MonthlyView(APIView):
     
 class CategorySummaryView(APIView):
     def get(self, request):
-        data = (
-            TansactionModel.objects
-            .filter(types='expense')
-            .values('category__name')
-            .annotate(total=Sum('amount'))
-        )
+        transactions = TansactionModel.objects.select_related('category').all()
+        summary = {}
+        for t in transactions:
+            category_name = t.category.category_name
+            if category_name not in summary:
+                summary[category_name] = {"total_income": 0, "total_expense": 0}
+            if t.types == "income":
+                summary[category_name]["total_income"] += t.amount
+            elif t.types == "expense":
+                summary[category_name]["total_expense"] += t.amount
         response = [
             {
-                "category": item['category__name'],
-                "total": item['total']
+                "category": category,
+                "total_income": values["total_income"],
+                "total_expense": values["total_expense"]
             }
-            for item in data
-        ]
+            for category, values in summary.items()
+        ]       
         return Response(response)

@@ -11,9 +11,4 @@ router = DefaultRouter()
 router.register('transaction', TransactionView, basename= 'tran')
 router.register('category', CateloryView, basename='category')
 
-
 urlpatterns = router.urls
-
-urlpatterns = [
-    path('deshboard/', include('deshboard.urls')),
-]
